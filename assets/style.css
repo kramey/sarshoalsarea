@@ -1,241 +1,156 @@
 /* ============================================
-   Shoals Area SAR Chapter — Shared Stylesheet
-   Mobile-first, responsive, no build tools needed
+   Additions for patriots.html
+   Paste into the bottom of assets/style.css
+   Assumes existing variables from your base
+   stylesheet — adjust the two below if your
+   navy/deep-red hex values differ.
    ============================================ */
 
-/* ---- Reset & base ---- */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+  --navy: #1b2a4a;
+  --deep-red: #7a1f2b;
+  --cream: #f7f5f1;
+  --ink: #23262b;
+  --muted: #6b6f76;
+  --border: #e2e0da;
 }
 
-html {
-  -webkit-text-size-adjust: 100%;
+/* ---- Mobile nav toggle (used across all pages) ---- */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--cream);
+  cursor: pointer;
 }
 
-body {
-  font-family: Georgia, 'Times New Roman', serif;
+@media (max-width: 700px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+}
+
+/* ---- Page hero (title band under the nav) ---- */
+.page-hero {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+}
+
+.page-hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  letter-spacing: 0.01em;
+}
+
+.page-hero-sub {
+  margin: 0 auto;
+  max-width: 42ch;
+  color: #d7dbe6;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* ---- Intro copy block ---- */
+.intro-block {
+  max-width: 68ch;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
   line-height: 1.6;
-  color: #222;
-  background-color: #fdfdfb;
+  color: var(--ink);
 }
 
-img, iframe {
-  max-width: 100%;
-  height: auto;
-  display: block;
+.intro-block p + p {
+  margin-top: 1rem;
 }
 
-a {
-  color: #7a1f2b; /* deep SAR red */
+/* ---- Patriot card grid ---- */
+.patriot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.patriot-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--deep-red);
+  background: var(--cream);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.patriot-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--navy);
+}
+
+.patriot-meta {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.patriot-card p:not(.patriot-meta):not(.patriot-member) {
+  margin: 0.25rem 0 0;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.patriot-member {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--deep-red);
+}
+
+/* ---- Bottom CTA block ---- */
+.cta-block {
+  background: var(--navy);
+  color: var(--cream);
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.cta-block h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.cta-block p {
+  margin: 0 auto 1.25rem;
+  max-width: 46ch;
+  color: #d7dbe6;
+  line-height: 1.5;
+}
+
+/* ---- Footer link row ---- */
+.footer-links {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.footer-links a {
+  color: var(--muted);
   text-decoration: none;
 }
 
-a:hover,
-a:focus {
+.footer-links a:hover {
+  color: var(--deep-red);
   text-decoration: underline;
-}
-
-h1, h2, h3 {
-  font-family: 'Trajan Pro', Georgia, serif;
-  color: #1c2a4a; /* navy */
-  line-height: 1.25;
-  margin-bottom: 0.6em;
-}
-
-h1 { font-size: 1.8rem; }
-h2 { font-size: 1.4rem; }
-h3 { font-size: 1.15rem; }
-
-p, ul, ol {
-  margin-bottom: 1em;
-  max-width: 65ch;
-}
-
-.container {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* ---- Top navigation ---- */
-.site-header {
-  background-color: #1c2a4a;
-  border-bottom: 4px solid #7a1f2b;
-}
-
-.nav-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.site-title {
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding: 0.25rem 0;
-}
-
-.site-title a {
-  color: #fff;
-}
-
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
-  list-style: none;
-  align-items: center;
-}
-
-.nav-links a {
-  color: #e6e6e6;
-  font-size: 0.95rem;
-  padding: 0.4rem 0.2rem;
-  display: inline-block;
-}
-
-.nav-links a:hover {
-  color: #fff;
-}
-
-/* Join button — visually distinct everywhere it appears */
-.btn-join {
-  background-color: #7a1f2b;
-  color: #fff !important;
-  padding: 0.5rem 1.1rem;
-  border-radius: 4px;
-  font-weight: bold;
-  text-decoration: none !important;
-  white-space: nowrap;
-}
-
-.btn-join:hover,
-.btn-join:focus {
-  background-color: #5e1620;
-}
-
-/* ---- Hero (homepage) ---- */
-.hero {
-  padding: 3rem 1rem;
-  text-align: center;
-  background: linear-gradient(180deg, #f4f1e8 0%, #fdfdfb 100%);
-}
-
-.hero h1 {
-  margin-bottom: 0.4em;
-}
-
-.hero p {
-  margin: 0 auto 1.5em;
-}
-
-.hero .btn-join {
-  font-size: 1.05rem;
-  padding: 0.75rem 1.5rem;
-}
-
-/* ---- Main content ---- */
-main {
-  padding: 2rem 0 3rem;
-}
-
-/* ---- Calendar embed ---- */
-.calendar-wrap {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.calendar-wrap iframe {
-  width: 100%;
-  min-height: 480px;
-  border: 0;
-}
-
-/* ---- FAQ accordion (no JS framework needed) ---- */
-.faq-item {
-  border-bottom: 1px solid #ddd;
-}
-
-.faq-item summary {
-  cursor: pointer;
-  font-weight: bold;
-  padding: 0.75rem 0;
-  color: #1c2a4a;
-}
-
-.faq-item p {
-  padding-bottom: 0.75rem;
-}
-
-/* ---- Footer ---- */
-.site-footer {
-  background-color: #1c2a4a;
-  color: #e6e6e6;
-  padding: 2rem 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.site-footer a {
-  color: #fff;
-  font-weight: bold;
-}
-
-.footer-links {
-  margin-top: 0.75rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 1.25rem;
-}
-
-/* ============================================
-   Responsive breakpoints
-   ============================================ */
-
-/* Small phones */
-@media (max-width: 480px) {
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.25rem; }
-
-  .nav-wrap {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .nav-links {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .btn-join {
-    width: 100%;
-    text-align: center;
-  }
-
-  .hero {
-    padding: 2rem 1rem;
-  }
-}
-
-/* Tablets and up */
-@media (min-width: 768px) {
-  .container {
-    padding: 0 2rem;
-  }
-
-  h1 { font-size: 2.1rem; }
-  h2 { font-size: 1.6rem; }
 }
